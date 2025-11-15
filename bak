@@ -1,0 +1,29 @@
+#!/bin/bash
+set -e
+
+# Remove trailing slash, if any
+target="${1%/}"
+
+# Check if target was provided
+if [ -z "$target" ]; then
+    echo -e "Error: no file or directory specified"
+    exit 1
+fi
+
+# Check if target exists
+if [ ! -e "$target" ]; then
+	echo -e "'$target': No such file or directory"
+	exit 1
+fi
+
+# If target already ends with ".bak" — do NOT add another ".bak"
+[[ $target == *.bak ]] && backup="$target" || backup="$target.bak"
+
+# Ask before overwriting existing backup file
+if [ -e "$backup" ]; then
+	read -p "'$backup' already exists. Overwrite? [Y/n] " ans
+    [[ $ans =~ ^[Yy]$ ]] || exit 1
+fi
+
+mv -- "$target" "$backup"
+echo "'$target' backup successfully created"

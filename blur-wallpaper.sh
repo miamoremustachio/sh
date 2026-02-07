@@ -5,7 +5,15 @@ OUT="$HOME/.config/background-blur"
 CACHE="$HOME/.cache/background.hash"
 
 # Get background path
-URI=$(gsettings get org.gnome.desktop.background picture-uri)
+SCHEMA=org.gnome.desktop.background
+KEY=picture-uri
+
+THEME="org.gnome.desktop.interface color-scheme"
+
+gsettings get $THEME | grep -q dark && \
+  KEY=picture-uri-dark
+
+URI=$(gsettings get $SCHEMA $KEY)
 URI=${URI//\'/}
 URI=${URI#file://}
 

@@ -34,7 +34,7 @@ fi
 
 # Blur the image
 magick "$URI" \
-  -blur 0x16 \
   -resize 1920x1080\> \
-  -brightness-contrast -15x-20 \
+  -blur 0x16 \
+  -brightness-contrast -20x-25 \
   "$OUT"

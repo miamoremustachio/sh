@@ -1,0 +1,9 @@
+# mkcd: make directory and cd into it
+
+#!/bin/bash
+set -e
+
+# Remove trailing slash, if any
+target="${1%/}"
+
+mkdir -p "$@" && cd "$1"

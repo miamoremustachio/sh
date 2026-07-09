@@ -1,3 +1,5 @@
+# bak: create backup copy of a file
+
 #!/bin/bash
 set -e
 
@@ -25,5 +27,5 @@ if [ -e "$backup" ]; then
     [[ $ans =~ ^[Yy]$ ]] || exit 1
 fi
 
-mv -- "$target" "$backup"
-echo "'$target' backup successfully created"
+cp -- "$target" "$backup"
+echo "'$target': backup successfully created"
